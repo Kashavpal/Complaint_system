@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}Notifications{% endblock %}
+{% block content %}<div class="pagehead"><div><span class="eyebrow">UPDATES</span><h1>Notifications</h1><p class="muted">Complaint submissions, assignments and status changes.</p></div></div>
+{% if not items %}<div class="empty">You're all caught up. No notifications yet.</div>{% endif %}
+<div class="notification-list">{% for n in items %}<article class="notification-card {% if not n.is_read %}unread{% endif %}"><div class="notification-dot"></div><div><b>{{n.title}}</b><p>{{n.message}}</p><small>{{n.created_at}}</small></div>{% if n.complaint_id %}<a class="small" href="{{url_for('complaint_detail',cid=n.complaint_id)}}">View</a>{% endif %}</article>{% endfor %}</div>{% endblock %}
